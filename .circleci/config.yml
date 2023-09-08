@@ -16,10 +16,6 @@ jobs:
       - run:
           name: Run tests
           command: python -m pytest
-      - persist_to_workspace:
-          root: ~/engineer_demo
-          paths:
-            - .
 
 
 workflows:
