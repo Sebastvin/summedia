@@ -16,6 +16,14 @@ jobs:
       - run:
           name: Run tests
           command: python -m pytest
+      - run:
+          name: Linting - Flake8
+          command: |
+            flake8 ./engineer_demo/ --output-file test-reports
+      - persist_to_workspace:
+          root: ~/engineer_demo
+          paths:
+            - .
 
 
 workflows:
