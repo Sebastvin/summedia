@@ -1,9 +1,4 @@
-import os
 import openai
-from dotenv import load_dotenv
-
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def condense_text_to_tweet(text: str, model_type: str) -> str:

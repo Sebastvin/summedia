@@ -1,9 +1,4 @@
-import os
 import openai
-from dotenv import load_dotenv
-
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def summarize_text(text: str, model_type: str, max_number_words: int) -> str:
@@ -32,7 +27,7 @@ def summarize_text(text: str, model_type: str, max_number_words: int) -> str:
             {
                 "role": "user",
                 "content": f"Summarize the following text into a text "
-                           f"with maximum {max_number_words} words, the text is {text}",
+                f"with maximum {max_number_words} words, the text is {text}",
             },
         ],
     )
