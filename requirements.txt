@@ -1,4 +1,4 @@
 pytest
 flake8
 openai
-newspaper
+newspaper3k

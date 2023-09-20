@@ -38,6 +38,15 @@ def summarize_text(text: str, model_type: str, max_number_words: int) -> str:
 
 
 def summary_article(article_url: str) -> str:
+    """
+    Summarizes the content of an article given its URL.
+
+    Args:
+    - article_url (str): The URL of the article to be summarized.
+
+    Returns:
+    - str: The summarized version of the article content.
+    """
     text = get_text_from_article(article_url)
     summarized_text = summarize_text(text, "gpt-3.5-turbo", 150)
     return summarized_text
