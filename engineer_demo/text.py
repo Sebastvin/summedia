@@ -1,4 +1,5 @@
 import openai
+from engineer_demo.fetching_data import get_text_from_article
 
 
 def summarize_text(text: str, model_type: str, max_number_words: int) -> str:
@@ -33,4 +34,10 @@ def summarize_text(text: str, model_type: str, max_number_words: int) -> str:
     )
     summarized_text = response["choices"][0]["message"]["content"].strip()
 
+    return summarized_text
+
+
+def summary_article(article_url: str) -> str:
+    text = get_text_from_article(article_url)
+    summarized_text = summarize_text(text, "gpt-3.5-turbo", 150)
     return summarized_text
