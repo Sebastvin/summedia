@@ -1,5 +1,6 @@
 import openai
 from engineer_demo.fetching_data import get_text_from_article
+from newspaper.article import ArticleException
 
 
 def summarize_text(text: str, model_type: str, max_number_words: int) -> str:
@@ -47,6 +48,9 @@ def summary_article(article_url: str) -> str:
     Returns:
     - str: The summarized version of the article content.
     """
-    text = get_text_from_article(article_url)
-    summarized_text = summarize_text(text, "gpt-3.5-turbo", 150)
-    return summarized_text
+    try:
+        text = get_text_from_article(article_url)
+        summarized_text = summarize_text(text, "gpt-3.5-turbo", 150)
+        return summarized_text
+    except ArticleException as e:
+        return f"Error summarizing the article: {str(e)}"
