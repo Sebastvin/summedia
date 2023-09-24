@@ -32,11 +32,3 @@ def test_summarize_text():
                 },
             ],
         )
-
-
-# Mock data
-SAMPLE_ARTICLE_URL = "https://example.com/sample-article"
-SAMPLE_ARTICLE_TEXT = (
-    "This is a sample article text. It's meant to represent the content of an article."
-)
-SAMPLE_SUMMARY = "Sample article summary."

@@ -54,3 +54,39 @@ def summary_article(article_url: str) -> str:
         return summarized_text
     except ArticleException as e:
         return f"Error summarizing the article: {str(e)}"
+
+
+def analyze_sentiment(text: str, model_type: str = "gpt-3.5-turbo") -> str:
+    """
+    Analyze the sentiment of a given text using the OpenAI API.
+
+    Args:
+    - text (str): The text to be analyzed.
+    - model_type (str): The model to use for the analysis.
+
+    Returns:
+    - str: The full response from the model.
+    """
+    try:
+        # Use the language model to predict sentiment
+        response = openai.ChatCompletion.create(
+            model=model_type,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant that analyzes"
+                    " sentiment in the given text.",
+                },
+                {
+                    "role": "user",
+                    "content": f"Analyze the sentiment of this text: '{text}'",
+                },
+            ],
+        )
+
+        # Return the full response from the model
+        return response.choices[0].message["content"].strip()
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return "Error in processing the request."
