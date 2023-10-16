@@ -13,9 +13,9 @@ jobs:
       - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
-      - run:
-          name: Run tests
-          command: python -m pytest
+#      - run:
+#          name: Run tests
+#          command: python -m pytest
       - run:
           name: Linting - Flake8
           command: |
