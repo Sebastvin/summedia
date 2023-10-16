@@ -26,24 +26,18 @@ class Text(APIRequester):
         """
 
         # Using the chat model for condensing the text
-        response = openai.ChatCompletion.create(
-            model=self.model_type,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant that summarize"
-                    f" long texts into text with maximum {max_number_words} words.",
-                },
-                {
-                    "role": "user",
-                    "content": f"Summarize the following text into a text "
-                    f"with maximum {max_number_words} words, the text is {text}",
-                },
-            ],
-        )
-        summarized_text = response["choices"][0]["message"]["content"].strip()
 
-        return summarized_text
+        content_system = (
+            f"You are a helpful assistant that summarize "
+            f"long texts into text with maximum {max_number_words} words."
+        )
+
+        content_user = (
+            f"Summarize the following text into a text with"
+            f" maximum {max_number_words} words, the text is"
+        )
+
+        return super().request_api(content_system, content_user, text)
 
     def summary_article(self, article_url: str) -> str:
         """

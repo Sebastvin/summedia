@@ -1,4 +1,3 @@
-import openai
 from engineer_demo.api import APIRequester
 
 
@@ -7,22 +6,6 @@ class Twitter(APIRequester):
 
     def __init__(self, model_type: str):
         self.model_type = model_type
-
-    def request_api(self, text: str) -> str:
-        response = openai.ChatCompletion.create(
-            model=self.model_type,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant that condenses long texts into tweets.",
-                },
-                {
-                    "role": "user",
-                    "content": f"Condense the following text into a tweet: {text}",
-                },
-            ],
-        )
-        return response["choices"][0]["message"]["content"].strip()
 
     def condense_text_to_tweet(self, text: str) -> str:
         """
@@ -34,4 +17,9 @@ class Twitter(APIRequester):
         Returns:
         - str: The condensed text suitable for a tweet.
         """
-        return self.request_api(text)
+        # return self.request_api(text)
+        content_system = (
+            "You are a helpful assistant that condenses long texts into tweets."
+        )
+        content_user = "Condense the following text into a tweet"
+        return super().request_api(content_system, content_user, text)
