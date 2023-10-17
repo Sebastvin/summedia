@@ -5,10 +5,15 @@ class APIRequester:
     """Abstract class to handle API requests."""
 
     def request_api(
-        self, content_system: str, content_user: str, text: str, *args, **kwargs
+        self,
+        content_system: str,
+        content_user: str,
+        model_type: str = "gpt-3.5-turbo",
+        *args,
+        **kwargs,
     ) -> str:
         response = openai.ChatCompletion.create(
-            model=self.model_type,
+            model=model_type,
             messages=[
                 {
                     "role": "system",
@@ -16,7 +21,7 @@ class APIRequester:
                 },
                 {
                     "role": "user",
-                    "content": f"{content_user}: {text}",
+                    "content": f"{content_user}",
                 },
             ],
         )

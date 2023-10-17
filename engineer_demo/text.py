@@ -1,16 +1,9 @@
-import openai
 from engineer_demo.fetching_data import get_text_from_article
 from newspaper.article import ArticleException
 from engineer_demo.api import APIRequester
 
 
 class Text(APIRequester):
-    def __init__(self, model_type: str):
-        self.model_type = model_type
-
-    def request_api(self, text: str) -> str:
-        pass
-
     def summarize_text(self, text: str, max_number_words: int) -> str:
         """
         Summarize a longer text into a shorter
@@ -34,10 +27,10 @@ class Text(APIRequester):
 
         content_user = (
             f"Summarize the following text into a text with"
-            f" maximum {max_number_words} words, the text is"
+            f" maximum {max_number_words} words, the text is {text}"
         )
 
-        return super().request_api(content_system, content_user, text)
+        return super().request_api(content_system, content_user)
 
     def summary_article(self, article_url: str) -> str:
         """
@@ -56,7 +49,7 @@ class Text(APIRequester):
         except ArticleException as e:
             return f"Error summarizing the article: {str(e)}"
 
-    def analyze_sentiment(self, text: str, model_type: str = "gpt-3.5-turbo") -> str:
+    def analyze_sentiment(self, text: str) -> str:
         """
         Analyze the sentiment of a given text using the OpenAI API.
 
@@ -68,24 +61,16 @@ class Text(APIRequester):
         - str: The full response from the model.
         """
         try:
-            # Use the language model to predict sentiment
-            response = openai.ChatCompletion.create(
-                model=self.model_type,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a helpful assistant that analyzes"
-                        " sentiment in the given text.",
-                    },
-                    {
-                        "role": "user",
-                        "content": f"Analyze the sentiment of this text: '{text}'",
-                    },
-                ],
+            # Return the full response from the model
+
+            content_system = (
+                "You are a helpful assistant that analyzes"
+                " sentiment in the given text."
             )
 
-            # Return the full response from the model
-            return response.choices[0].message["content"].strip()
+            content_user = f"Analyze the sentiment of this text: {text}"
+
+            return super().request_api(content_system, content_user)
 
         except Exception as e:
             print(f"Error: {e}")
