@@ -7,7 +7,6 @@ def get_article(article_url: str) -> str:
     return article
 
 
-
 def get_text_from_article(article_url: str) -> str:
     """
     Extracts the main text content from an article given its URL.
@@ -26,4 +25,8 @@ def get_text_from_article(article_url: str) -> str:
     return article.text
 
 
-print(get_text_from_article("https://boringcashcow.com/post/business-ideas-for-software-developers-in-2023"))
+print(
+    get_text_from_article(
+        "https://boringcashcow.com/post/business-ideas-for-software-developers-in-2023"
+    )
+)
