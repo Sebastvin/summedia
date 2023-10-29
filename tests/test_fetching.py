@@ -11,9 +11,10 @@ from unittest.mock import patch
         ("https://example.com/article2", "This is the text of article 2."),
     ],
 )
+
 @patch(
     "engineer_demo.fetching_data.Article"
-)  # Use the correct import path to 'Article'.
+)
 def test_get_text_from_article(mock_article, article_url, expected_text):
     # Mock the behavior of the Article class.
     mock_instance = mock_article.return_value
