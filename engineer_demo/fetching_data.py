@@ -23,10 +23,3 @@ def get_text_from_article(article_url: str) -> str:
     article = get_article(article_url)
     article.parse()
     return article.text
-
-
-print(
-    get_text_from_article(
-        "https://boringcashcow.com/post/business-ideas-for-software-developers-in-2023"
-    )
-)
