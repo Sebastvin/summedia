@@ -1,5 +1,3 @@
-pytest
 flake8
 openai
 newspaper3k
-responses

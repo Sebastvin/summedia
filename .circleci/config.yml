@@ -13,9 +13,18 @@ jobs:
       - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
+
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install ruff codespell flake8 responses pytest
+
       - run:
           name: Run tests
           command: python -m pytest
+
+
       - run:
           name: Linting - Flake8, Ruff, codespell
           command: |
