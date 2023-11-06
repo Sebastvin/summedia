@@ -17,9 +17,11 @@ jobs:
           name: Run tests
           command: python -m pytest
       - run:
-          name: Linting - Flake8
+          name: Linting - Flake8, Ruff, codespell
           command: |
             flake8 ./engineer_demo/ --output-file test-reports
+            codespell ./engineer_demo/
+            ruff --output-format=github --target-version=py310 --line-length=100 --line-length=100 ./engineer_demo/
 
 
 workflows:
