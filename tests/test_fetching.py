@@ -1,5 +1,5 @@
 import pytest
-from engineer_demo.fetching_data import get_text_from_article
+from engineer_demo.fetching_data import get_text_from_article, article_time_read
 from unittest.mock import patch
 
 
@@ -22,3 +22,19 @@ def test_get_text_from_article(mock_article, article_url, expected_text):
     # Call the function and compare the result to the expected text.
     actual_text = get_text_from_article(article_url)
     assert actual_text == expected_text
+
+
+def test_article_time_read_empty_text():
+    """Test for an empty text."""
+    assert article_time_read("") == 0
+
+
+def test_article_time_read_short_text():
+    """Test for a very short text."""
+    assert article_time_read("123") == 0
+
+
+def test_article_time_read_long_text():
+    """Test for a long text."""
+    text = "word " * 500
+    assert article_time_read(text) == 2
