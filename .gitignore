@@ -9,6 +9,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+**/sandbox.py
+engineer_demo/sandbox.py
+
 .env
 
 # C extensions

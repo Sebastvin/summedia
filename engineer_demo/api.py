@@ -1,8 +1,9 @@
-import openai
+from openai import OpenAI
 
 
 class APIRequester:
-    """Abstract class to handle API requests."""
+    def __init__(self, api_key):
+        self.api_key = api_key
 
     def request_api(
         self,
@@ -12,8 +13,9 @@ class APIRequester:
         *args,
         **kwargs,
     ) -> str:
-        response = openai.ChatCompletion.create(
-            model=model_type,
+        client = OpenAI(api_key=self.api_key)
+
+        response = client.chat.completions.create(
             messages=[
                 {
                     "role": "system",
@@ -24,5 +26,7 @@ class APIRequester:
                     "content": f"{content_user}",
                 },
             ],
+            model=model_type,
         )
-        return response["choices"][0]["message"]["content"].strip()
+        return response.choices[0].message.content
+        # return response["choices"][0]["message"]["content"]
