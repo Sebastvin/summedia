@@ -4,7 +4,9 @@ from engineer_demo.api import APIRequester
 
 
 class Text(APIRequester):
-    def summarize_text(self, text: str, max_number_words: int) -> str:
+    def summarize_text(
+        self, text: str, max_number_words: int, model_type: str = None
+    ) -> str:
         """
         Summarize a longer text into a shorter
         message using OpenAI's chat model.
@@ -18,8 +20,6 @@ class Text(APIRequester):
         - str: The summarized text suitable for a max_number_words.
         """
 
-        # Using the chat model for condensing the text
-
         content_system = (
             f"You are a helpful assistant that summarize "
             f"long texts into text with maximum {max_number_words} words."
@@ -30,7 +30,10 @@ class Text(APIRequester):
             f" maximum {max_number_words} words, the text is {text}"
         )
 
-        return super().request_api(content_system, content_user)
+        if model_type:
+            return super().request_api(content_system, content_user, model_type)
+        else:
+            return super().request_api(content_system, content_user)
 
     def summary_article(self, article_url: str) -> str:
         """
@@ -49,7 +52,7 @@ class Text(APIRequester):
         except ArticleException as e:
             return f"Error summarizing the article: {str(e)}"
 
-    def analyze_sentiment(self, text: str) -> str:
+    def analyze_sentiment(self, text: str, model_type: str = None) -> str:
         """
         Analyze the sentiment of a given text using the OpenAI API.
 
@@ -70,7 +73,10 @@ class Text(APIRequester):
 
             content_user = f"Analyze the sentiment of this text: {text}"
 
-            return super().request_api(content_system, content_user)
+            if model_type:
+                return super().request_api(content_system, content_user, model_type)
+            else:
+                return super().request_api(content_system, content_user)
 
         except Exception as e:
             print(f"Error: {e}")
