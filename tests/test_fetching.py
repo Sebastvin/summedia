@@ -1,5 +1,5 @@
 import pytest
-from engineer_demo.fetching_data import (
+from summedia.fetching_data import (
     get_text_from_article,
     article_time_read,
     get_images_from_html,
@@ -15,7 +15,7 @@ import responses
         ("https://example.com/article2", "This is the text of article 2."),
     ],
 )
-@patch("engineer_demo.fetching_data.Article")
+@patch("summedia.fetching_data.Article")
 def test_get_text_from_article(mock_article, article_url, expected_text):
     # Mock the behavior of the Article class.
     mock_instance = mock_article.return_value

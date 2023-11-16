@@ -28,9 +28,9 @@ jobs:
       - run:
           name: Linting - Flake8, Ruff, codespell
           command: |
-            flake8 ./engineer_demo/ --output-file test-reports
-            codespell ./engineer_demo/
-            ruff --output-format=github --target-version=py310 --line-length=100 ./engineer_demo/
+            flake8 ./summedia/ --output-file test-reports
+            codespell ./summedia/
+            ruff --output-format=github --target-version=py310 --line-length=100 ./summedia/
 
 
 workflows:
