@@ -1,4 +1,9 @@
-<center><img src="https://github.com/Sebastvin/engineer-demo/assets/34211633/a7327ebd-8489-4c8d-a58b-8936967bf639" height="300" width="300"></center>
+<div align="center">
+<img src="https://github.com/Sebastvin/engineer-demo/assets/34211633/a7327ebd-8489-4c8d-a58b-8936967bf639" height="300" width="300">
+</br>
+<img src="https://github.com/Sebastvin/engineer-demo/assets/34211633/01e65a79-69e8-4c58-bccb-ab9939ecf442">
+</div>
+
 
 
 # Using MediaSum in a News Web Application
