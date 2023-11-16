@@ -1,4 +1,4 @@
-from engineer_demo.api import APIRequester
+from summedia.api import APIRequester
 
 
 class Twitter(APIRequester):

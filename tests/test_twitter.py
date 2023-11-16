@@ -1,31 +1,17 @@
-# from unittest.mock import patch
-# from engineer_demo.twitter import condense_text_to_tweet
-#
-#
-# def test_condense_text_to_tweet():
-#     # Mocked response from OpenAI
-#     mock_response = {"choices": [{"message": {"content": "Mocked tweet text"}}]}
-#
-#     # Using the patch function to mock openai.ChatCompletion.create method
-#     with patch(
-#         "engineer_demo.twitter.openai.ChatCompletion.create", return_value=mock_response
-#     ) as mock_method:
-#         result = condense_text_to_tweet(
-#             "This is a long text that should be condensed", "gpt-4.0-turbo"
-#         )
-#         assert result == "Mocked tweet text"
-#         mock_method.assert_called_once_with(
-#             model="gpt-4.0-turbo",
-#             messages=[
-#                 {
-#                     "role": "system",
-#                     "content": "You are a helpful assistant that
-#                       condenses long texts into tweets.",
-#                 },
-#                 {
-#                     "role": "user",
-#                     "content": "Condense the following text into a tweet: "
-#                     "This is a long text that should be condensed",
-#                 },
-#             ],
-#         )
+import unittest
+from unittest.mock import patch
+from summedia.twitter import Twitter
+
+
+class TestTwitter(unittest.TestCase):
+    def setUp(self):
+        self.twitter = Twitter(api_key="dummy_api_key")
+
+    @patch("summedia.api.APIRequester.request_api")
+    def test_condense_text_empty_input(self, mock_request_api):
+        # Configure the mock to return a specific string
+        mock_request_api.return_value = "Mocked response"
+
+        # Test with empty string
+        result = self.twitter.condense_text_to_tweet("")
+        self.assertEqual(result, "Mocked response")

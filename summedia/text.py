@@ -1,6 +1,6 @@
-from engineer_demo.fetching_data import get_text_from_article
+from summedia.fetching_data import get_text_from_article
 from newspaper.article import ArticleException
-from engineer_demo.api import APIRequester
+from summedia.api import APIRequester
 
 
 class Text(APIRequester):
@@ -45,6 +45,7 @@ class Text(APIRequester):
         Returns:
         - str: The summarized version of the article content.
         """
+
         try:
             text = get_text_from_article(article_url)
             summarized_text = self.summarize_text(text, 150)
