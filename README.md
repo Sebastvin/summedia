@@ -1,9 +1,14 @@
 <div align="center">
 <img src="https://github.com/Sebastvin/engineer-demo/assets/34211633/a7327ebd-8489-4c8d-a58b-8936967bf639" height="300" width="300">
-<hr>
+<br>
 <img src="https://github.com/Sebastvin/engineer-demo/assets/34211633/01e65a79-69e8-4c58-bccb-ab9939ecf442">
 </div>
 
+<hr>
+
+![CircleCI](https://img.shields.io/circleci/build/github/Sebastvin/summedia?logo=pypi)
+[![GitHub License](https://img.shields.io/github/license/Sebastvin/summedia)](https://github.com/Sebastvin/summedia)
+[![GitHub issues](https://img.shields.io/github/issues/Sebastvin/summedia)](https://github.com/Sebastvin/summedia/issues)
 
 
 # Using SumMedia in a News Web Application
@@ -43,4 +48,31 @@ Work may involve enhancing ChatGPT to generate unique news articles based on spe
 SumMedia is capable of handling articles in different languages, making it versatile for international applications.
 
 ---
+
+#### Requirements & Costs
+You'll need a paid OpenAI account and an API key.
+
+Check out more here:
+https://openai.com/pricing
+
+#### Installation
+```
+pip install git+https://github.com/Sebastvin/summedia.git
+```
+
+
+#### How to run tests
+```
+pytest --cov=summedia
+```
+
+
+#### Roadmap
+
+* [ ] Documentation
+* [ ] Find a better way to handle app architecture
+* [ ] More functionality
+* [ ] More tests!
+
+
 
