@@ -35,21 +35,44 @@ class Text(APIRequester):
         else:
             return super().request_api(content_system, content_user)
 
-    def summary_article(self, article_url: str) -> str:
+    def summary_article(
+        self, article_url: str, article_text: str = None, max_number_words: int = 150
+    ) -> str:
         """
-        Summarizes the content of an article given its URL.
+        Summarizes the content of an article provided either through a URL or as a text string.
+
+        This function attempts to fetch and summarize the article content from the given URL.
+        If the URL is not provided or inaccessible, it falls back to summarizing the article content
+        passed as a text string.
 
         Args:
-        - article_url (str): The URL of the article to be summarized.
+            article_url (str): The URL of the article to be summarized. If provided, the function fetches
+                               the article text from this URL.
+            article_text (str, optional): Direct text input of the article. This is used if `article_url`
+                                          is not provided or the content could not be fetched from the URL.
+            max_number_words (int, optional): The maximum number of words for the summary. Defaults to 150.
 
         Returns:
-        - str: The summarized version of the article content.
+            str: The summarized version of the article content. If an error occurs during the process,
+                 an error message is returned instead.
+
+        Raises:
+            ArticleException: If there's an issue with fetching or processing the article from the URL.
+
+        Note:
+            The function prioritizes `article_url` over `article_text`. If both are provided, it attempts
+            to use `article_url` first.
         """
 
         try:
-            text = get_text_from_article(article_url)
-            summarized_text = self.summarize_text(text, 150)
-            return summarized_text
+            if article_url:
+                text = get_text_from_article(article_url)
+                summarized_text = self.summarize_text(text, max_number_words)
+                return summarized_text
+            elif article_text:
+                summarized_text = self.summarize_text(article_text, max_number_words)
+                return summarized_text
+
         except ArticleException as e:
             return f"Error summarizing the article: {str(e)}"
 
