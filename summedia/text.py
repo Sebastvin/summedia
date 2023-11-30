@@ -46,22 +46,27 @@ class Text(APIRequester):
         passed as a text string.
 
         Args:
-            article_url (str): The URL of the article to be summarized. If provided, the function fetches
+            article_url (str): The URL of the article to be summarized.
+                               If provided, the function fetches
                                the article text from this URL.
-            article_text (str, optional): Direct text input of the article. This is used if `article_url`
-                                          is not provided or the content could not be fetched from the URL.
-            max_number_words (int, optional): The maximum number of words for the summary. Defaults to 150.
+            article_text (str, optional): Direct text input of the article.
+                                          This is used if `article_url`
+                                          is not provided or the content could not be
+                                          fetched from the URL.
+            max_number_words (int, optional): The maximum number of words for the summary.
+                                            Defaults to 150.
 
         Returns:
-            str: The summarized version of the article content. If an error occurs during the process,
-                 an error message is returned instead.
+            str: The summarized version of the article content.
+                If an error occurs during the process, an error message is returned instead.
 
         Raises:
-            ArticleException: If there's an issue with fetching or processing the article from the URL.
+            ArticleException: If there's an issue with fetching or
+                            processing the article from the URL.
 
         Note:
-            The function prioritizes `article_url` over `article_text`. If both are provided, it attempts
-            to use `article_url` first.
+            The function prioritizes `article_url` over `article_text`.
+            If both are provided, it attempts to use `article_url` first.
         """
 
         try:
