@@ -110,3 +110,23 @@ class Text(APIRequester):
         except Exception as e:
             print(f"Error: {e}")
             return "Error in processing the request."
+
+    def to_bullet_list(self, text: str, model_type: str = None) -> str:
+        try:
+            content_system = (
+                "You are a helpful assistant that analyzes" " the given text."
+            )
+
+            content_user = (
+                f"Give bullet a list of the most important"
+                f" information from a given text, the text is: {text}"
+            )
+
+            if model_type:
+                return super().request_api(content_system, content_user, model_type)
+            else:
+                return super().request_api(content_system, content_user)
+
+        except Exception as e:
+            print(e)
+            return "Error in processing the request."
