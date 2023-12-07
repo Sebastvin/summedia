@@ -1,7 +1,7 @@
 from summedia.fetching_data import get_text_from_article
 from newspaper.article import ArticleException
 from summedia.api import APIRequester
-from translator import Language
+from summedia.translator import Language
 
 
 class Text(APIRequester):
@@ -143,7 +143,8 @@ class Text(APIRequester):
 
             lang = Language.get_language_name(language_to_translate)
 
-            content_system = "You are a helpful assistant that translate given text to other language."
+            content_system = ("You are a helpful assistant that translate given"
+                              " text to other language.")
 
             content_user = f"Translate given text {text} to {lang} language"
 
@@ -155,3 +156,12 @@ class Text(APIRequester):
         except Exception as e:
             print(e)
             return "Error in processing the request."
+
+    def find_quotes(self):
+        pass
+
+    def simplify_text(self):
+        pass
+
+    def tag_and_categorize_text(self):
+        pass

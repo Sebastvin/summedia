@@ -24,3 +24,6 @@ class SocialMedia(APIRequester):
             return super().request_api(content_system, content_user, model_type)
         else:
             return super().request_api(content_system, content_user)
+
+    def post_to_facebook(self):
+        pass
