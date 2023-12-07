@@ -2,6 +2,7 @@ from summedia.fetching_data import get_text_from_article
 from newspaper.article import ArticleException
 from summedia.api import APIRequester
 from summedia.translator import Language
+from summedia.level import SimplificationLevel
 
 
 class Text(APIRequester):
@@ -179,8 +180,36 @@ class Text(APIRequester):
         #     print(e)
         #     return "Error in processing the request."
 
-    def simplify_text(self):
-        pass
+    def adjust_text_complexity(
+        self,
+        text: str,
+        level: SimplificationLevel = SimplificationLevel.STUDENT,
+        model_type: str = None,
+    ):
+        try:
+            content_system = (
+                "You are an AI trained to simplify text to different levels of complexity. "
+                "Based on the specified level, simplify the text while preserving its main meaning. "
+                "The levels are: 'child', 'teen', 'student', 'expert'. Each level represents "
+                "a higher degree of complexity and vocabulary."
+            )
+
+            content_user = (
+                f"Simplify the following text to the '{level.value}' level: {text}. "
+                f"Ensure that the simplified text is suitable for the understanding level of a '{level.value}', "
+                f"using appropriate vocabulary and sentence structure for that level."
+            )
+
+            if model_type:
+                response = super().request_api(content_system, content_user, model_type)
+            else:
+                response = super().request_api(content_system, content_user)
+
+            return response
+
+        except Exception as e:
+            print(e)
+            return "Error in processing the request."
 
     def tag_and_categorize_text(self, text: str, model_type: str = None):
         try:
