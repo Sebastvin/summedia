@@ -143,8 +143,10 @@ class Text(APIRequester):
 
             lang = Language.get_language_name(language_to_translate)
 
-            content_system = ("You are a helpful assistant that translate given"
-                              " text to other language.")
+            content_system = (
+                "You are a helpful assistant that translate given"
+                " text to other language."
+            )
 
             content_user = f"Translate given text {text} to {lang} language"
 
