@@ -189,14 +189,16 @@ class Text(APIRequester):
         try:
             content_system = (
                 "You are an AI trained to simplify text to different levels of complexity. "
-                "Based on the specified level, simplify the text while preserving its main meaning. "
+                "Based on the specified level, simplify the text while preserving "
+                "its main meaning. "
                 "The levels are: 'child', 'teen', 'student', 'expert'. Each level represents "
                 "a higher degree of complexity and vocabulary."
             )
 
             content_user = (
                 f"Simplify the following text to the '{level.value}' level: {text}. "
-                f"Ensure that the simplified text is suitable for the understanding level of a '{level.value}', "
+                f"Ensure that the simplified text is suitable for the"
+                f" understanding level of a '{level.value}', "
                 f"using appropriate vocabulary and sentence structure for that level."
             )
 
