@@ -1,7 +1,7 @@
 from summedia.api import APIRequester
 
 
-class Twitter(APIRequester):
+class SocialMedia(APIRequester):
     """Concrete class inheriting from APIRequester to handle text condensation via OpenAI."""
 
     def condense_text_to_tweet(self, text: str, model_type: str = None) -> str:
