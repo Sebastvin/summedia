@@ -1,3 +1,4 @@
 flake8
 openai
 newspaper3k
+pycountry

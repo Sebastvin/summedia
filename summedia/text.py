@@ -159,11 +159,53 @@ class Text(APIRequester):
             print(e)
             return "Error in processing the request."
 
-    def find_quotes(self):
+    def find_quotes(self, text: str, model_type: str = None) -> str:
         pass
+        # try:
+        #     content_system = (
+        #         "You are a helpful assistant that find quotes in text"
+        #     )
+        #
+        #     content_user = (f"Find all quotes in given text {text}"
+        #                     f" return quotes in python dict format"
+        #                     f" like quote: author")
+        #
+        #     if model_type:
+        #         return super().request_api(content_system, content_user, model_type)
+        #     else:
+        #         return super().request_api(content_system, content_user)
+        #
+        # except Exception as e:
+        #     print(e)
+        #     return "Error in processing the request."
 
     def simplify_text(self):
         pass
 
-    def tag_and_categorize_text(self):
-        pass
+    def tag_and_categorize_text(self, text: str, model_type: str = None):
+        try:
+            content_system = (
+                "You are an intelligent assistant trained to analyze text and "
+                "identify key themes, concepts, and categories. "
+                "Your task is to categorize the text and suggest relevant tags based"
+                " on its content."
+            )
+
+            content_user = (
+                f"Analyze the following text and categorize it into two lists: {text}. "
+                f"List one should contain relevant tags representing the main themes "
+                f"and subjects of the text. "
+                f"List two should contain categories that the text belongs to. "
+                f"Return the results as two separate lists: tags and categories."
+            )
+
+            if model_type:
+                response = super().request_api(content_system, content_user, model_type)
+            else:
+                response = super().request_api(content_system, content_user)
+
+            return response
+
+        except Exception as e:
+            print(e)
+            return "Error in processing the request."
