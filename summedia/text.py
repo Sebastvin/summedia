@@ -1,6 +1,7 @@
 from summedia.fetching_data import get_text_from_article
 from newspaper.article import ArticleException
 from summedia.api import APIRequester
+from translator import Language
 
 
 class Text(APIRequester):
@@ -121,6 +122,30 @@ class Text(APIRequester):
                 f"Give bullet a list of the most important"
                 f" information from a given text, the text is: {text}"
             )
+
+            if model_type:
+                return super().request_api(content_system, content_user, model_type)
+            else:
+                return super().request_api(content_system, content_user)
+
+        except Exception as e:
+            print(e)
+            return "Error in processing the request."
+
+    def translate_text(
+        self,
+        text: str,
+        model_type: str = None,
+        language_to_translate: str = "en",
+    ) -> str:
+        try:
+            Language.validate_language(language_to_translate)
+
+            lang = Language.get_language_name(language_to_translate)
+
+            content_system = "You are a helpful assistant that translate given text to other language."
+
+            content_user = f"Translate given text {text} to {lang} language"
 
             if model_type:
                 return super().request_api(content_system, content_user, model_type)
