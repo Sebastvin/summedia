@@ -160,26 +160,6 @@ class Text(APIRequester):
             print(e)
             return "Error in processing the request."
 
-    def find_quotes(self, text: str, model_type: str = None) -> str:
-        pass
-        # try:
-        #     content_system = (
-        #         "You are a helpful assistant that find quotes in text"
-        #     )
-        #
-        #     content_user = (f"Find all quotes in given text {text}"
-        #                     f" return quotes in python dict format"
-        #                     f" like quote: author")
-        #
-        #     if model_type:
-        #         return super().request_api(content_system, content_user, model_type)
-        #     else:
-        #         return super().request_api(content_system, content_user)
-        #
-        # except Exception as e:
-        #     print(e)
-        #     return "Error in processing the request."
-
     def adjust_text_complexity(
         self,
         text: str,
