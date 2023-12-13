@@ -25,5 +25,41 @@ class SocialMedia(APIRequester):
         else:
             return super().request_api(content_system, content_user)
 
-    def post_to_facebook(self):
-        pass
+    def post_to_facebook(
+        self, text: str, model_type: str = None, word_length: int = 50
+    ):
+        """
+        Posts the given text to Facebook after optimizing it for the platform.
+
+        This method takes a text input and formats it to be suitable for a Facebook post.
+        It utilizes an expert assistant model to optimize the text, ensuring it is engaging
+        and appropriate for Facebook's audience and format. The content is tailored to fit
+        within a specified word length, focusing on key messages and readability.
+        The method can optionally use a specified model type for this optimization process.
+
+        Parameters:
+        - text (str): The text to be posted on Facebook.
+        - model_type (str, optional): The type of model to be used for text optimization.
+          If not provided, a default model is used.
+        - word_length (int, optional): The target word count for the optimized text.
+          Defaults to 50 words.
+
+        Returns:
+        - The response from the API call to post the text to Facebook.
+        """
+
+        content_system = (
+            "You are an expert assistant skilled in preparing and"
+            " optimizing texts for Facebook posts."
+        )
+        content_user = (
+            f"Please format and optimize the following text for a Facebook post, ensuring "
+            f"it is engaging and concise. "
+            f"Tailor the content to fit within {word_length} words, focusing on retaining "
+            f"key messages and readability: {text}"
+        )
+
+        if model_type:
+            return super().request_api(content_system, content_user, model_type)
+        else:
+            return super().request_api(content_system, content_user)
