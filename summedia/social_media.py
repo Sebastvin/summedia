@@ -2,7 +2,24 @@ from summedia.api import APIRequester
 
 
 class SocialMedia(APIRequester):
-    """Concrete class inheriting from APIRequester to handle text condensation via OpenAI."""
+    """
+    A subclass of APIRequester specialized in processing and optimizing
+    text for social media platforms.
+
+    The SocialMedia class extends the functionalities of APIRequester to provide methods
+    specifically tailored for social media content creation and manipulation. It enables
+    text condensation for tweets, formatting and optimization for Facebook posts, and
+    potentially other social media-related functionalities. The class leverages an external
+    AI model to perform these tasks, accessible through the inherited request_api method.
+
+    Methods:
+    - condense_text_to_tweet: Condenses text to fit within the character limit of a tweet.
+    - post_to_facebook: Formats and optimizes text for posting on Facebook.
+
+    This class is designed for applications where social media content creation and
+    optimization are required, utilizing the capabilities of an AI model for effective
+    communication in social media contexts.
+    """
 
     def condense_text_to_tweet(self, text: str, model_type: str = None) -> str:
         """
