@@ -1,11 +1,34 @@
-from summedia.fetching_data import get_text_from_article
 from newspaper.article import ArticleException
+
 from summedia.api import APIRequester
-from summedia.translator import Language
+from summedia.fetching_data import get_text_from_article
 from summedia.level import SimplificationLevel
+from summedia.translator import Language
 
 
 class Text(APIRequester):
+    """
+    A subclass of APIRequester specialized in text analysis and manipulation tasks.
+
+    The Text class extends the functionality of the APIRequester to provide
+    specific methods for handling various text-based operations. These operations
+    include text summarization, translation, sentiment analysis, text simplification,
+    and categorization. It utilizes an external AI model (accessible through the
+    APIRequester's request_api method) to perform these tasks.
+
+    Methods:
+    - summarize_text: Summarizes a given text.
+    - summary_article: Summarizes the content of an article from a URL or text.
+    - analyze_sentiment: Analyzes the sentiment of a given text.
+    - to_bullet_list: Converts text into a bullet-point summary.
+    - translate_text: Translates text to a specified language.
+    - adjust_text_complexity: Simplifies text to a specified complexity level.
+    - tag_and_categorize_text: Analyzes text for key themes and categories.
+
+    The class is designed to be used where text analysis and manipulation
+    functionalities are required, leveraging the capabilities of an AI model.
+    """
+
     def summarize_text(
         self, text: str, max_number_words: int, model_type: str = None
     ) -> str:
@@ -94,9 +117,8 @@ class Text(APIRequester):
         Returns:
         - str: The full response from the model.
         """
-        try:
-            # Return the full response from the model
 
+        try:
             content_system = (
                 "You are a helpful assistant that analyzes"
                 " sentiment in the given text."
@@ -114,6 +136,26 @@ class Text(APIRequester):
             return "Error in processing the request."
 
     def to_bullet_list(self, text: str, model_type: str = None) -> str:
+        """
+        Converts the provided text into a bullet-point summary using an AI model.
+
+        This method sends a request to an AI model to analyze the given text and
+        summarize it into a list of bullet points, highlighting the most important
+        information.
+
+        Parameters:
+        - text (str): The text to be converted into bullet points.
+        - model_type (str, optional): The model type to use for the summary
+                                        generation. If not provided, a default model
+                                        is used.
+
+        Returns:
+        - str: A bullet-point summary of the provided text.
+
+        Exceptions:
+        - Catches and prints any exceptions that occur during processing, returning
+        a generic error message.
+        """
         try:
             content_system = (
                 "You are a helpful assistant that analyzes" " the given text."
@@ -139,6 +181,29 @@ class Text(APIRequester):
         model_type: str = None,
         language_to_translate: str = "en",
     ) -> str:
+        """
+        Translates the provided text to a specified language using an AI model.
+
+        This method first validates and retrieves the full name of the target language
+        using the `Language` class. It then sends a request to an AI model to translate
+        the text into the desired language.
+
+        Parameters:
+        - text (str): The text to be translated.
+        - model_type (str, optional): The model type to use for the translation.
+                                      If not provided, a default model is used.
+        - language_to_translate (str, optional): The language code (e.g., 'en' for
+                                                 English) to which the text should
+                                                 be translated. Defaults to English.
+
+        Returns:
+        - str: The translated text in the target language.
+
+        Exceptions:
+        - Catches and prints any exceptions that occur during processing, returning
+          a generic error message.
+        """
+
         try:
             Language.validate_language(language_to_translate)
 
@@ -166,6 +231,29 @@ class Text(APIRequester):
         level: SimplificationLevel = SimplificationLevel.STUDENT,
         model_type: str = None,
     ):
+        """
+        Simplifies the provided text to a specified complexity level using an AI model.
+
+        This method sends a request to an AI model to simplify the given text. The
+        level of simplification is determined by the 'level' parameter, which can be
+        'child', 'teen', 'student', or 'expert', each representing a different degree
+        of complexity.
+
+        Parameters:
+        - text (str): The text to be simplified.
+        - level (SimplificationLevel): The complexity level to which the text should
+                                       be simplified. Defaults to STUDENT level.
+        - model_type (str, optional): The model type to use for the simplification.
+                                      If not provided, a default model is used.
+
+        Returns:
+        - str: The simplified text suitable for the specified complexity level.
+
+        Exceptions:
+        - Catches and prints any exceptions that occur during processing, returning
+          a generic error message.
+        """
+
         try:
             content_system = (
                 "You are an AI trained to simplify text to different levels of complexity. "
@@ -194,6 +282,28 @@ class Text(APIRequester):
             return "Error in processing the request."
 
     def tag_and_categorize_text(self, text: str, model_type: str = None):
+        """
+        Analyzes a given text to identify key themes, concepts, and categories,
+        and suggests relevant tags and categories.
+
+        This method sends a request to an AI model to analyze the provided text.
+        It constructs a specific prompt for the AI to categorize the text into tags
+        and categories, then parses the AI's response.
+
+        Parameters:
+        - text (str): The text to be analyzed.
+        - model_type (str, optional): The model type to use for the analysis. If not
+                                      provided, a default model is used.
+
+        Returns:
+        - str: The AI's response containing two lists - one for tags and another for
+               categories of the provided text.
+
+        Exceptions:
+        - Catches and prints any exceptions that occur during processing, returning
+          a generic error message.
+        """
+
         try:
             content_system = (
                 "You are an intelligent assistant trained to analyze text and "

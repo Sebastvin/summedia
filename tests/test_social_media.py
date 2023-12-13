@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+
 from summedia.social_media import SocialMedia
 
 

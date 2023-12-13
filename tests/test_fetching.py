@@ -1,11 +1,13 @@
+from unittest.mock import patch
+
 import pytest
+import responses
+
 from summedia.fetching_data import (
-    get_text_from_article,
     article_time_read,
     get_images_from_html,
+    get_text_from_article,
 )
-from unittest.mock import patch
-import responses
 
 
 @pytest.mark.parametrize(

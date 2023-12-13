@@ -1,10 +1,23 @@
-from newspaper import Article
 from typing import List
+
 import requests
 from bs4 import BeautifulSoup
+from newspaper import Article
 
 
-def get_article(article_url: str) -> str:
+def get_article(article_url: str) -> Article:
+    """
+    Retrieves the text content of a web article from the specified URL.
+
+    This function uses the Newspaper3k library to download and extract the main
+    body text of a news article or similar web page.
+
+    Parameters:
+    - article_url (str): The URL of the web article to be retrieved.
+
+    Returns:
+    - Article: The main content of the web article.
+    """
     article = Article(article_url)
     article.download()
     return article
