@@ -73,6 +73,3 @@ pytest --cov=summedia
 * [ ] Find a better way to handle app architecture
 * [ ] More functionality
 * [ ] More tests!
-
-
-

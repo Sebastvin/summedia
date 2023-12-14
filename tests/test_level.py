@@ -1,4 +1,5 @@
 import unittest
+
 from summedia.level import SimplificationLevel
 
 
