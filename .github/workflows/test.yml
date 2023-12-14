@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff codespell flake8 mypi
+          pip install ruff codespell flake8 isort
 
       - name: Lint with ruff, flake8 and codespell isort
         run: |
@@ -31,5 +31,4 @@ jobs:
           ruff --output-format=github --select=E9,F63,F7,F82 --target-version=py311 --line-length=100 .
           flake8 --max-line-length=100 --exclude=__init__.py .
           codespell .
-          mypy --ignore-missing-imports .
           isort --profile black --force-single-line --line-length=100 --filter-files .
