@@ -1,0 +1,35 @@
+name: SumMedia - Tests
+
+run-name: Test SumMedia package
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff codespell flake8 mypi
+
+      - name: Lint with ruff, flake8 and codespell isort
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          ruff --output-format=github --select=E9,F63,F7,F82 --target-version=py311 --line-length=100 .
+          flake8 --max-line-length=100 --exclude=__init__.py .
+          codespell .
+          mypy --ignore-missing-imports .
+          isort --profile black --force-single-line --line-length=100 --filter-files .
