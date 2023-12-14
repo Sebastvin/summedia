@@ -6,7 +6,8 @@
 
 <hr>
 
-![CircleCI](https://img.shields.io/circleci/build/github/Sebastvin/summedia?logo=pypi)
+
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Sebastvin/summedia/test.yml)
 [![GitHub License](https://img.shields.io/github/license/Sebastvin/summedia)](https://github.com/Sebastvin/summedia)
 [![GitHub issues](https://img.shields.io/github/issues/Sebastvin/summedia)](https://github.com/Sebastvin/summedia/issues)
 
