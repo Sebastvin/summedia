@@ -14,7 +14,7 @@ class Text(APIRequester):
     specific methods for handling various text-based operations. These operations
     include text summarization, translation, sentiment analysis, text simplification,
     and categorization. It utilizes an external AI model (accessible through the
-    APIRequester's request_api method) to perform these tasks.
+    APIRequesters request_api method) to perform these tasks.
 
     Methods:
     - summarize_text: Summarizes a given text.
@@ -157,9 +157,7 @@ class Text(APIRequester):
         a generic error message.
         """
         try:
-            content_system = (
-                "You are a helpful assistant that analyzes" " the given text."
-            )
+            content_system = "You are a helpful assistant that analyzes the given text."
 
             content_user = (
                 f"Give bullet a list of the most important"

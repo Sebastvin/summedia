@@ -61,22 +61,27 @@ def article_time_read(article_text: str, words_per_minute: int = 238) -> int:
 
 def get_images_from_html(article_url: str) -> List[str]:
     """
-    Extracts all img tags from an HTML article.
+    Extracts all unique img tags from an HTML article while preserving their order.
 
     Parameters:
     - article_url (str): The URL of the HTML article.
 
     Returns:
-    - List[str]: A list of img tags.
+    - List[str]: A list of unique img tags, in the order they appear in the HTML.
     """
     try:
         html_code = get_article(article_url).html
         soup = BeautifulSoup(html_code, "html.parser")
-        full_img_urls = [
-            img["src"]
-            for img in soup.find_all("img")
-            if img.has_attr("src") and img["src"].startswith("http")
-        ]
+
+        full_img_urls = []
+        for img in soup.find_all("img"):
+            if (
+                img.has_attr("src")
+                and img["src"].startswith("http")
+                and img["src"] not in full_img_urls
+            ):
+                full_img_urls.append(img["src"])
+
         return full_img_urls
 
     except requests.RequestException as e:

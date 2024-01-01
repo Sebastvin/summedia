@@ -53,12 +53,6 @@ class SocialMedia(APIRequester):
             else super().request_api(content_system, content_user)
         )
 
-        # If word_length is not respected, post-process the text
-        # This is a basic approach; more sophisticated text trimming methods may be used
-        condensed_words = condensed_text.split()
-        if len(condensed_words) > word_length:
-            condensed_text = " ".join(condensed_words[:word_length])
-
         return condensed_text
 
     def post_to_facebook(
