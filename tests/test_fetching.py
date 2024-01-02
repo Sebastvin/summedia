@@ -2,11 +2,12 @@ from unittest.mock import patch
 
 import pytest
 import responses
-import requests
 
-from summedia.fetching_data import article_time_read
-from summedia.fetching_data import get_images_from_html
-from summedia.fetching_data import get_text_from_article
+from summedia.fetching_data import (
+    article_time_read,
+    get_images_from_html,
+    get_text_from_article,
+)
 
 
 @pytest.mark.parametrize(
