@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 import pytest
 import responses
+import requests
 
 from summedia.fetching_data import article_time_read
 from summedia.fetching_data import get_images_from_html
@@ -60,10 +61,9 @@ def test_get_images_from_html():
     """
     responses.add(responses.GET, mock_url, body=mock_html_content, status=200)
 
-    print(mock_html_content)
-
     # Call the function
     img_urls = get_images_from_html(mock_url)
+    print(set(img_urls))
 
     # Assertions
     assert len(img_urls) == 1
