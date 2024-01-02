@@ -81,7 +81,6 @@ def get_images_from_html(article_url: str) -> List[str]:
                 and img["src"] not in full_img_urls
             ):
                 full_img_urls.append(img["src"])
-
         return full_img_urls
 
     except requests.RequestException as e:

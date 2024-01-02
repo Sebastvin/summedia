@@ -44,7 +44,6 @@ def test_article_time_read_long_text():
     assert article_time_read(text) == 2
 
 
-@pytest.mark.filterwarnings("ignore::DeprecationWarning")
 @responses.activate
 def test_get_images_from_html():
     # Mock the HTML response
@@ -53,12 +52,15 @@ def test_get_images_from_html():
     <html>
         <body>
             <img src="https://example.com/image1.jpg" alt="Image 1">
+            <img src="https://example.com/image1.jpg" alt="Duplicated image">
             <img src="/image2.jpg" alt="Image 2">
             <img src="image3.jpg" alt="Image 3">
         </body>
     </html>
     """
     responses.add(responses.GET, mock_url, body=mock_html_content, status=200)
+
+    print(mock_html_content)
 
     # Call the function
     img_urls = get_images_from_html(mock_url)
