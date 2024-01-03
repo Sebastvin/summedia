@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 import requests
 from bs4 import BeautifulSoup
@@ -23,7 +23,7 @@ def get_article(article_url: str) -> Article:
     return article
 
 
-def get_text_from_article(article_url: str) -> str:
+def get_text(article_url: str) -> str:
     """
     Extracts the main text content from an article given its URL.
 
@@ -41,7 +41,7 @@ def get_text_from_article(article_url: str) -> str:
     return article.text
 
 
-def article_time_read(article_text: str, words_per_minute: int = 238) -> int:
+def get_time_read(article_url: str, words_per_minute: int = 238) -> int:
     """
     Source: https://scholarwithin.com/average-reading-speed
 
@@ -53,13 +53,15 @@ def article_time_read(article_text: str, words_per_minute: int = 238) -> int:
     - int: Reading time returned in minutes
     """
 
+    article_text = get_text(article_url)
+    print("xd", article_text)
     num_chars = len(article_text.split())
     estimated_minutes = num_chars / words_per_minute
 
     return round(estimated_minutes)
 
 
-def get_images_from_html(article_url: str) -> List[str]:
+def get_images(article_url: str) -> List[str]:
     """
     Extracts all unique img tags from an HTML article while preserving their order.
 
@@ -83,6 +85,107 @@ def get_images_from_html(article_url: str) -> List[str]:
                 full_img_urls.append(img["src"])
         return full_img_urls
 
+    except requests.RequestException as e:
+        print(f"Error fetching the URL: {e}")
+        return []
+
+
+def get_publishing_date(article_url: str):
+    article = get_article(article_url)
+    article.parse()
+    return article.publish_date
+
+
+def get_authors(article_url: str):
+    article = get_article(article_url)
+    article.parse()
+    return article.authors
+
+
+def get_title(article_url: str):
+    article = get_article(article_url)
+    article.parse()
+    return article.title
+
+
+def get_movies(article_url: str) -> str:
+    """
+    Extracts and returns the title of a movie from a given article URL.
+
+    This function fetches an article from the specified URL, parses it,
+    and returns the title of the movie mentioned in the article.
+
+    Parameters:
+    article_url (str): The URL of the article to extract the movie title from.
+
+    Returns:
+    str: The title of the movie extracted from the article.
+
+    Note:
+    This function assumes that the article contains a movie title and
+    that the 'get_article' function is capable of fetching and parsing
+    the article correctly.
+    """
+
+    article = get_article(article_url)
+    article.parse()
+    return article.movies
+
+
+def get_meta_description(article_url: str) -> Union[str, None, list]:
+    """
+    Extracts the meta description from a given article URL.
+
+    Parameters:
+    - article_url (str): The URL of the article from which to extract the meta description.
+
+    Returns:
+    - Union[str, None, list]: A string containing the content of the 'meta description' tag,
+      None if the tag is not found, or an empty list in case of a request exception.
+
+    Raises:
+    - requests.RequestException: If there is an error fetching the article URL.
+    """
+    try:
+        html_code = get_article(article_url).html
+        soup = BeautifulSoup(html_code, "html.parser")
+
+        meta_description = soup.find("meta", attrs={"name": "description"})
+
+        if meta_description:
+            return meta_description.get("content", None)
+
+        return None
+    except requests.RequestException as e:
+        print(f"Error fetching the URL: {e}")
+        return []
+
+
+def get_meta_keywords(article_url: str) -> Union[str, None, list]:
+    """
+    Extracts the meta keywords from a given article URL.
+
+    Parameters:
+    - article_url (str): The URL of the article from which to extract the meta keywords.
+
+    Returns:
+    - Union[str, None, list]: A string containing the content of the 'meta keywords' tag,
+     None if the tag is not found, or an empty list in case of a request exception.
+
+    Raises:
+    - requests.RequestException: If there is an error fetching the article URL.
+    """
+
+    try:
+        html_code = get_article(article_url).html
+        soup = BeautifulSoup(html_code, "html.parser")
+
+        meta_keywords = soup.find("meta", attrs={"name": "keywords"})
+
+        if meta_keywords:
+            return meta_keywords.get("content", None)
+
+        return None
     except requests.RequestException as e:
         print(f"Error fetching the URL: {e}")
         return []

@@ -12,9 +12,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/Sebastvin/summedia)](https://github.com/Sebastvin/summedia/issues)
 
 
-# Using SumMedia in a News Web Application
+# SumMedia in a News Web package
 
-The SumMedia library is a powerful Python tool used for extracting and parsing newspaper articles. It simplifies the process of web scraping, article downloading and working with openai API.  The plugin enables various functionalities related to news content personalization and categorization. Here's an overview of its key features and functionalities:
+The SumMedia is a powerful Python tool used for extracting and parsing newspaper articles. It simplifies the process of web scraping, article downloading and working with openai API. The plugin enables various functionalities related to news content personalization and categorization. Here's an overview of its key features and functionalities:
 
 ## Table of Contents
 1. [Article Extraction](#article-extraction)
@@ -26,10 +26,9 @@ The SumMedia library is a powerful Python tool used for extracting and parsing n
 
 ---
 
-## Article Extraction
-#### SumMedia can download articles from a given URL and extract useful information like the text, authors, publish date, images, videos, and more.
+### Article Extraction
+Download articles from a given URL and extract useful information like the text, authors, publish date, images, videos, and more.
 
-Example:
 ```python
 from summedia.fetching_data import (
     article_time_read,
@@ -39,14 +38,13 @@ from summedia.fetching_data import (
 
 text_article = get_text_from_article("www.example.url")
 time_read = article_time_read(text_article, words_per_minute=238)
-img_urls = get_images_from_html("www.example.url")
+img_urls = get_images_from_article("www.example.url")
 ```
 ---
 
-### SumMedia for Filtering and Categorizing Articles
-#### The work can involve using ChatGPT to analyze and filter news, removing spam, false information, or inappropriate content. You can also develop an algorithm for categorizing articles based on topic, location, date, and other factors.
+### Filtering and Categorizing Articles
+The work can involve using ChatGPT to analyze and filter news, removing spam, false information, or inappropriate content. You can also develop an algorithm for categorizing articles based on topic, location, date, and other factors.
 
-Example:
 ```python
 import os
 from summedia.text import Text
@@ -56,10 +54,9 @@ tag_and_categorize_text = txt.tag_and_categorize_text("your text here", model_ty
 ```
 ---
 
-### SumMedia as a Personal Assistant for Reading Articles
-#### SumMedia can browse various news websites, fetch article headlines and brief summaries, and then deliver them in a user-friendly manner.
+### Personal Assistant for Reading Articles
+Browse various news websites, fetch article headlines and brief summaries, and then deliver them in a user-friendly manner.
 
-Example:
 ```python
 import os
 from summedia.text import Text
@@ -73,10 +70,9 @@ adjust_text_complexity = text.adjust_text_complexity("www.example.url", level = 
 ```
 ---
 
-### SumMedia for Generating Post for Social Media
-#### With SumMedia you are able to automate posts to Twitter/X and facebook by just specifying the url for article. 
+### Generating Post for Social Media
+Automate posts to Twitter/X and facebook by just specifying the url for article. 
 
-Example:
 ```python
 import os
 from summedia.social_media import SocialMedia
@@ -94,10 +90,8 @@ condense_text_to_tweet = social_media.condense_text_to_tweet(
 ---
 
 ### Multi-language Support
-####  SumMedia is capable of handling articles in different languages, making it versatile for international applications. 
-#### You can also use it as an article translator.
+Handling articles in different languages, making it versatile for international applications. You can also use it as an article translator.
 
-Example:
 ```python
 import os
 from summedia.text import Text

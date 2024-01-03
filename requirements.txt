@@ -4,3 +4,4 @@ newspaper3k
 pycountry
 requests
 types-requests
+python-dateutil

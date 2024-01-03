@@ -1,7 +1,7 @@
 from newspaper.article import ArticleException
 
 from summedia.api import APIRequester
-from summedia.fetching_data import get_text_from_article
+from summedia.fetching_data import get_text
 from summedia.level import SimplificationLevel
 from summedia.translator import Language
 
@@ -96,7 +96,7 @@ class Text(APIRequester):
 
         try:
             if article_url:
-                text = get_text_from_article(article_url)
+                text = get_text(article_url)
                 summarized_text = self.summarize_text(text, max_number_words)
                 return summarized_text
             elif article_text:
