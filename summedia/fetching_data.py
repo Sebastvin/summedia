@@ -27,14 +27,14 @@ def get_text(article_url: str) -> str:
     """
     Extracts the main text content from an article given its URL.
 
-    Args:
+    Parameters:
     - article_url (str): The URL of the article from which the text content is to be extracted.
 
     Returns:
     - str: The main text content of the article.
 
     Note:
-    This function uses the 'newspaper3k' library to download and parse the article.
+    - This function uses the 'newspaper3k' library to download and parse the article.
     """
     article = get_article(article_url)
     article.parse()
@@ -45,7 +45,7 @@ def get_time_read(article_url: str, words_per_minute: int = 238) -> int:
     """
     Source: https://scholarwithin.com/average-reading-speed
 
-    Args:
+    Parameters:
     - article_text(str): Text from which we count reading time
     - words_per_minute(int): Number of words read per minute
 
@@ -91,18 +91,56 @@ def get_images(article_url: str) -> List[str]:
 
 
 def get_publishing_date(article_url: str):
+    """
+    Retrieves the publishing date of an article from the given URL.
+
+    This function fetches an article using the specified URL, parses it,
+    and extracts the publishing date of the article.
+
+    Parameters:
+    - article_url (str): The URL of the article from which to extract the publishing date.
+
+    Returns:
+    - The publishing date of the article. The return type depends on how the publish_date
+      is structured in the article object. It could be a string, a datetime object, etc.
+    """
     article = get_article(article_url)
     article.parse()
     return article.publish_date
 
 
 def get_authors(article_url: str):
+    """
+    Retrieves the list of authors of an article from the given URL.
+
+    This function fetches an article using the specified URL, parses it,
+    and extracts the list of authors associated with the article.
+
+    Args:
+    - article_url (str): The URL of the article from which to extract the authors.
+
+    Returns:
+    - A list of authors of the article. If no authors are found, the function
+      may return an empty list, depending on the implementation of the article object.
+    """
     article = get_article(article_url)
     article.parse()
     return article.authors
 
 
-def get_title(article_url: str):
+def get_title(article_url: str) -> str:
+    """
+    Retrieves the title of an article from the given URL.
+
+    This function fetches an article using the specified URL, parses it,
+    and extracts the title of the article.
+
+    Parameters:
+    - article_url (str): The URL of the article from which to extract the title.
+
+    Returns:
+    - The title of the article as a string.
+    """
     article = get_article(article_url)
     article.parse()
     return article.title
@@ -116,15 +154,15 @@ def get_movies(article_url: str) -> str:
     and returns the title of the movie mentioned in the article.
 
     Parameters:
-    article_url (str): The URL of the article to extract the movie title from.
+    - article_url (str): The URL of the article to extract the movie title from.
 
     Returns:
-    str: The title of the movie extracted from the article.
+    - str: The title of the movie extracted from the article.
 
     Note:
-    This function assumes that the article contains a movie title and
-    that the 'get_article' function is capable of fetching and parsing
-    the article correctly.
+    - This function assumes that the article contains a movie title and
+     that the 'get_article' function is capable of fetching and parsing
+     the article correctly.
     """
 
     article = get_article(article_url)

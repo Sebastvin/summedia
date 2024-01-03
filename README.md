@@ -31,14 +31,28 @@ Download articles from a given URL and extract useful information like the text,
 
 ```python
 from summedia.fetching_data import (
-    article_time_read,
-    get_images_from_html,
-    get_text_from_article,
+    get_text,
+    get_time_read,
+    get_images,
+    get_publishing_date,
+    get_authors,
+    get_title,
+    get_movies,
+    get_meta_description, 
+    get_meta_keywords
 )
 
-text_article = get_text_from_article("www.example.url")
-time_read = article_time_read(text_article, words_per_minute=238)
-img_urls = get_images_from_article("www.example.url")
+URL = "www.example.url"
+
+text_article = get_text(URL)
+time_read = get_time_read(URL, words_per_minute=238)
+img_urls = get_images(URL)
+publish_date = get_publishing_date(URL)
+authors = get_authors(URL)
+title = get_title(URL)
+movies = get_movies(URL)
+meta_description = get_meta_description(URL)
+meta_keywords = get_meta_keywords(URL)
 ```
 ---
 
