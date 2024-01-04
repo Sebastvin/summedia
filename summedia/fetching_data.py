@@ -54,7 +54,6 @@ def get_time_read(article_url: str, words_per_minute: int = 238) -> int:
     """
 
     article_text = get_text(article_url)
-    print("xd", article_text)
     num_chars = len(article_text.split())
     estimated_minutes = num_chars / words_per_minute
 

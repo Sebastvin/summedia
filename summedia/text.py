@@ -30,7 +30,7 @@ class Text(APIRequester):
     """
 
     def summarize_text(
-        self, text: str, max_number_words: int, model_type: str = None
+        self, text: str, max_number_words: int = 150, model_type: str = None
     ) -> str:
         """
         Summarize a longer text into a shorter
@@ -106,7 +106,9 @@ class Text(APIRequester):
         except ArticleException as e:
             return f"Error summarizing the article: {str(e)}"
 
-    def analyze_sentiment(self, text: str, model_type: str = None) -> str:
+    def analyze_sentiment(
+        self, text: str, max_number_words: int = 150, model_type: str = None
+    ) -> str:
         """
         Analyze the sentiment of a given text using the OpenAI API.
 
@@ -121,10 +123,13 @@ class Text(APIRequester):
         try:
             content_system = (
                 "You are a helpful assistant that analyzes"
-                " sentiment in the given text."
+                f" sentiment in the given text, analyze text with maximum {max_number_words} words."
             )
 
-            content_user = f"Analyze the sentiment of this text: {text}"
+            content_user = (
+                f"Analyze the sentiment of this text: {text}"
+                f" to maximum {max_number_words} words."
+            )
 
             if model_type:
                 return super().request_api(content_system, content_user, model_type)
