@@ -38,12 +38,13 @@ class SocialMedia(APIRequester):
 
         content_system = (
             "You are a helpful assistant that condenses long texts into tweets."
+            " All responses must be in English."
         )
 
         content_user = (
-            f"Condense the following text into a tweet. "
-            f"Tailor the content to fit within {word_length} words, focusing"
-            f" on retaining key messages and readability: {text}"
+            f"Condense the following text into a tweet, ensuring the output is in English. "
+            f"Tailor the content to fit within {word_length} words, while "
+            f"focusing on retaining key messages and readability: {text}"
         )
 
         # Retrieve the condensed text from the API
@@ -80,13 +81,13 @@ class SocialMedia(APIRequester):
 
         content_system = (
             "You are an expert assistant skilled in preparing and "
-            "optimizing texts for Facebook posts."
+            "optimizing texts for Facebook posts. All responses must be in English."
         )
 
         content_user = (
-            f"Please format and optimize the following text for a"
-            f" Facebook post, ensuring "
-            f"it is engaging and concise. Tailor the content to fit within {word_length} words, "
+            f"Please format and optimize the following text for a "
+            f"Facebook post, ensuring it is engaging, concise, and in English. "
+            f"Tailor the content to fit within {word_length} words, "
             f"focusing on retaining key messages and readability: {text}"
         )
 
