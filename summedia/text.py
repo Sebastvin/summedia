@@ -29,9 +29,7 @@ class Text(APIRequester):
     functionalities are required, leveraging the capabilities of an AI model.
     """
 
-    def summarize_text(
-        self, text: str, max_number_words: int = 150, model_type: str = None
-    ) -> str:
+    def summarize_text(self, text: str, max_number_words: int = 150, model_type: str = None) -> str:
         """
         Summarize a longer text into a shorter
         message using OpenAI's chat model.
@@ -46,13 +44,15 @@ class Text(APIRequester):
         """
 
         content_system = (
-            f"You are a helpful assistant that summarize "
-            f"long texts into text with maximum {max_number_words} words."
+            f"You are a helpful assistant that summarizes "
+            f"long texts into a text with a maximum of {max_number_words} words. "
+            f"All summaries must be in English."
         )
 
         content_user = (
-            f"Summarize the following text into a text with"
-            f" maximum {max_number_words} words, the text is {text}"
+            f"Summarize the following text into a concise version, "
+            f"using a maximum of {max_number_words} words. "
+            f"Ensure the summary is in English. The text to summarize is: {text}"
         )
 
         if model_type:
@@ -122,13 +122,16 @@ class Text(APIRequester):
 
         try:
             content_system = (
-                "You are a helpful assistant that analyzes"
-                f" sentiment in the given text, analyze text with maximum {max_number_words} words."
+                f"You are a helpful assistant that analyzes sentiment in given texts. "
+                f"All analyses must be provided in English, and you can analyze"
+                f" text with up to {max_number_words} words."
             )
 
             content_user = (
-                f"Analyze the sentiment of this text: {text}"
-                f" to maximum {max_number_words} words."
+                f"Analyze the sentiment of the following text, "
+                f"ensuring your analysis is in English. "
+                f"The analysis should not exceed {max_number_words} words. "
+                f"The text for sentiment analysis is: {text}"
             )
 
             if model_type:
@@ -162,11 +165,15 @@ class Text(APIRequester):
         a generic error message.
         """
         try:
-            content_system = "You are a helpful assistant that analyzes the given text."
+            content_system = (
+                "You are a helpful assistant that analyzes"
+                " the given text and provides responses in English."
+            )
 
             content_user = (
-                f"Give bullet a list of the most important"
-                f" information from a given text, the text is: {text}"
+                f"Provide a bullet-point list summarizing the most important"
+                f" information from the given text, ensuring the summary"
+                f" is in English. The text to be summarized is: {text}"
             )
 
             if model_type:
@@ -213,8 +220,7 @@ class Text(APIRequester):
             lang = Language.get_language_name(language_to_translate)
 
             content_system = (
-                "You are a helpful assistant that translate given"
-                " text to other language."
+                "You are a helpful assistant that translate given" " text to other language."
             )
 
             content_user = f"Translate given text {text} to {lang} language"
@@ -259,7 +265,8 @@ class Text(APIRequester):
 
         try:
             content_system = (
-                "You are an AI trained to simplify text to different levels of complexity. "
+                "You are an AI trained to simplify text to different levels of complexity,"
+                " providing responses in English. "
                 "Based on the specified level, simplify the text while preserving "
                 "its main meaning. "
                 "The levels are: 'child', 'teen', 'student', 'expert'. Each level represents "
@@ -267,10 +274,10 @@ class Text(APIRequester):
             )
 
             content_user = (
-                f"Simplify the following text to the '{level.value}' level: {text}. "
-                f"Ensure that the simplified text is suitable for the"
-                f" understanding level of a '{level.value}', "
-                f"using appropriate vocabulary and sentence structure for that level."
+                f"Simplify the following text to the '{level.value}' level, "
+                f"ensuring the simplified text is in English. "
+                f"The text should be suitable for the understanding level of a '{level.value}', "
+                f"using appropriate vocabulary and sentence structure for that level: {text}."
             )
 
             if model_type:

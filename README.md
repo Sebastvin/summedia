@@ -38,7 +38,7 @@ from summedia.fetching_data import (
     get_authors,
     get_title,
     get_movies,
-    get_meta_description, 
+    get_meta_description,
     get_meta_keywords
 )
 
@@ -57,7 +57,7 @@ meta_keywords = get_meta_keywords(URL)
 ---
 
 ### Filtering and Categorizing Articles
-The work can involve using ChatGPT to analyze and filter news, removing spam, false information, or inappropriate content. You can also develop an algorithm for categorizing articles based on topic, location, date, and other factors.
+The work can involve using ChatGPT to analyze and filter news or inappropriate content. You can also develop an algorithm for categorizing articles based on topic, location, date, and other factors.
 
 ```python
 import os
@@ -78,14 +78,14 @@ from summedia.level import SimplificationLevel
 
 text = Text(api_key=os.environ.get("OPENAI_API_KEY"))
 summary_article = text.summarize_text("www.example.url", max_number_words=150, model_type="gpt-3.5-turbo-1106")
-analyze_sentiment = text.analyze_sentiment("www.example.url", model_type="gpt-3.5-turbo-1106")
+analyze_sentiment = text.analyze_sentiment("www.example.url", max_number_words=150, model_type="gpt-3.5-turbo-1106")
 to_bullet_list = text.to_bullet_list("www.example.url", model_type="gpt-3.5-turbo-1106")
 adjust_text_complexity = text.adjust_text_complexity("www.example.url", level = SimplificationLevel.STUDENT, model_type="gpt-3.5-turbo-1106")
 ```
 ---
 
 ### Generating Post for Social Media
-Automate posts to Twitter/X and facebook by just specifying the url for article. 
+Automate posts to Twitter/X and facebook by just specifying the url for article.
 
 ```python
 import os

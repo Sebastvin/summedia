@@ -3,5 +3,5 @@ openai
 newspaper3k
 pycountry
 requests
-types-requests
+pitypes-requests
 python-dateutil
