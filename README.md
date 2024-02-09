@@ -115,6 +115,20 @@ translate_text = txt.translate_text("your text here", model_type="gpt-3.5-turbo-
 ```
 
 ---
+### Create your own prompt
+Create a prompt tailored to your needs.
+
+```python
+import os
+from summedia.elastic import ElasticAPIRequester
+
+txt = ElasticAPIRequester(api_key=os.environ.get("OPENAI_API_KEY"))
+content_system_prompt = "YOUR SYSTEM PROMPT HERE"
+content_user_prompt = "YOUR USER PROMPT HERE"
+translate_text = txt.elastic_prompt(content_system_prompt, content_user_prompt,  model_type="gpt-3.5-turbo-1106")
+```
+
+---
 
 ### Requirements & Costs
 You'll need a <b>paid</b> OpenAI account and an API key.
