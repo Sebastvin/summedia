@@ -29,7 +29,9 @@ class Text(APIRequester):
     functionalities are required, leveraging the capabilities of an AI model.
     """
 
-    def summarize_text(self, text: str, max_number_words: int = 150, model_type: str = None) -> str:
+    def summarize_text(
+        self, text: str, max_number_words: int = 150, model_type: str = None
+    ) -> str:
         """
         Summarize a longer text into a shorter
         message using OpenAI's chat model.
@@ -220,7 +222,8 @@ class Text(APIRequester):
             lang = Language.get_language_name(language_to_translate)
 
             content_system = (
-                "You are a helpful assistant that translate given" " text to other language."
+                "You are a helpful assistant that translate given"
+                " text to other language."
             )
 
             content_user = f"Translate given text {text} to {lang} language"
@@ -327,7 +330,7 @@ class Text(APIRequester):
                 f"List one should contain relevant tags representing the main themes "
                 f"and subjects of the text. "
                 f"List two should contain categories that the text belongs to. "
-                f"Return the results as two separate lists: tags and categories."
+                f"Return the results as two separate numbered lists: tags and categories."
             )
 
             if model_type:

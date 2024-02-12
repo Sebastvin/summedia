@@ -122,10 +122,10 @@ Create a prompt tailored to your needs.
 import os
 from summedia.elastic import ElasticAPIRequester
 
-elastic_prompt = ElasticAPIRequester(api_key=os.environ.get("OPENAI_API_KEY"))
+your_prompt = ElasticAPIRequester(api_key=os.environ.get("OPENAI_API_KEY"))
 content_system_prompt = "YOUR SYSTEM PROMPT HERE"
 content_user_prompt = "YOUR USER PROMPT HERE"
-elastic_prompt_result = elastic_prompt.elastic_prompt(content_system_prompt, content_user_prompt,  model_type="gpt-3.5-turbo-1106")
+elastic_prompt_result = your_prompt.elastic_prompt(content_system_prompt, content_user_prompt,  model_type="gpt-3.5-turbo-1106")
 ```
 
 ---
